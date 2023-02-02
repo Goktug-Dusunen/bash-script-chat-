@@ -10,6 +10,7 @@ echo "Enter your username:"
 read username
 echo "$username" | gpg --encrypt > encrypted.gpg
 s=$(cat encrypted.gpg)
+rm encrypted.gpg
 
 
 echo "Connecting to $ip:$port as $username..."
@@ -29,5 +30,6 @@ while true; do
   read -p "> " message
   echo "$message" | gpg --encrypt > encryptedm.gpg
   pow=(cat encryptedm.gpg)
+  rm encryptedm.gpg
   echo "$s: $pow" | nc "$ip" "$port"
 done
